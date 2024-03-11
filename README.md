@@ -2,54 +2,63 @@
 
 ## Objective
 
-The goal of this project is to create a model that predicts the app rating based on various features provided in the Google Play Store dataset.
+The goal is to build a model that predicts the app rating based on various app features. This model will be particularly useful for the Google Play Store team's new feature, aiming to boost the visibility of promising apps.
 
 ## Problem Statement
 
-The Google Play Store team plans to boost the visibility of promising apps, and the boost will be influenced by various factors, including app ratings. The objective is to predict which apps will have high ratings to help Google promote them effectively.
+The Google Play Store team is introducing a feature to enhance the visibility of certain apps, prioritizing them in recommendations and search results. The objective is to identify apps that are likely to receive high ratings, indicating their potential for success.
 
-## Dataset
+## Domain
 
-The dataset, named "googleplaystore.csv," contains information such as App name, Category, Rating, Reviews, Size, Installs, Type, Price, Content Rating, Genres, Last Updated, Current Ver, and Android Ver.
+General
+
+## Analysis to be Done
+
+The focus is on predicting app ratings based on customer-provided data. The dataset used for analysis is the Google Play Store data ( "googleplaystore.csv").
 
 ## Steps to Perform
 
-1. **Loading the Data:**
+1. **Load the Data:**
    - Use pandas to load the dataset.
    - Check for null values in each column.
 
 2. **Data Cleaning:**
    - Drop records with null values.
-   - Convert the 'Size,' 'Reviews,' 'Installs,' and 'Price' columns to numeric format.
-   - Perform sanity checks to ensure data accuracy.
+   - Convert variables to correct types and formats.
 
-3. **Univariate Analysis:**
-   - Create boxplots for Price and Reviews.
-   - Create histograms for Rating and Size.
-   - Identify outliers and note observations.
+3. **Sanity Checks:**
+   - Ensure the average rating falls between 1 and 5.
+   - Drop rows with ratings outside this range.
+   - Drop records where reviews exceed installs.
+   - For free apps (type = "Free"), drop rows with prices greater than 0.
 
-4. **Outlier Treatment:**
-   - Drop records with very high prices.
+4. **Univariate Analysis:**
+   - Boxplot for Price to identify outliers.
+   - Boxplot for Reviews to identify unusually high review counts.
+   - Histograms for Rating and Size to understand their distributions.
+
+5. **Outlier Treatment:**
+   - Investigate and drop records with very high prices (e.g., $200).
    - Drop records with more than 2 million reviews.
    - Handle outliers in the 'Installs' field using percentiles.
 
-5. **Bivariate Analysis:**
-   - Create scatter plots and box plots to assess relationships between Rating and other features.
-   - Explore patterns between Rating and Price, Size, Reviews, Content Rating, and Category.
+6. **Bivariate Analysis:**
+   - Scatter plots and box plots for Rating against various features.
+   - Explore relationships with Price, Size, Reviews, Content Rating, and Category.
 
-6. **Data Preprocessing:**
+7. **Data Preprocessing:**
    - Create a copy of the dataframe (inp1).
-   - Apply log transformation to Reviews and Installs.
-   - Drop unnecessary columns.
+   - Apply log transformation (np.log1p) to Reviews and Installs.
+   - Drop unnecessary columns (App, Last Updated, Current Ver, Android Ver).
    - Get dummy columns for Category, Genres, and Content Rating (inp2).
 
-7. **Train-Test Split:**
+8. **Train-Test Split:**
    - Split the data into training (70%) and testing (30%) sets.
    - Separate data into X_train, y_train, X_test, and y_test.
 
-8. **Model Building:**
-   - Use linear regression.
-   - Report R2 on the train set.
+9. **Model Building:**
+   - Use linear regression as the modeling technique.
+   - Report the R2 on the train set.
    - Make predictions on the test set and report R2.
 
 ## Instructions for Use
@@ -58,4 +67,3 @@ The dataset, named "googleplaystore.csv," contains information such as App name,
 2. Follow the data cleaning and preprocessing steps.
 3. Perform univariate and bivariate analysis as directed.
 4. Build and evaluate the linear regression model.
-
